@@ -4,10 +4,14 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import Login from './routes/Login'
-import Grid from './routes/Grid'
+import Dashboard from './components/Dashboard'
 
 function App() {
   const router = createBrowserRouter([
+    {
+      path:"/",
+      element:<Dashboard/>
+    },
     {
       path:"/login",
       element:<Login/>
