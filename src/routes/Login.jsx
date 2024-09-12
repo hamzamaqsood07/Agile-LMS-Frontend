@@ -8,14 +8,17 @@ import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { FormControl } from '@mui/material';
 import Divider from '@mui/material/Divider';
+import { useForm } from 'react-hook-form';
+import { NavLink } from 'react-router-dom';
+
 
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = React.useState(false);
     const [error, setError] = useState("")
-  
-    
+
+
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -26,23 +29,35 @@ export default function Login() {
     const handleMouseUpPassword = (event) => {
         event.preventDefault();
     };
+ 
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors,isSubmitting },
+    } = useForm()
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const onSubmit = async ( data) => {
+        setError("")
         const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }),
-            credentials: 'include'
+            body: JSON.stringify({ ...data}),
+            credentials:"include"
         })
-        const data = await response.json();
-        if(!data.message){
+        const info = await response.json();
+        if (!info.message) {
             setError("")
         }
-        else{
-        setError(data.message)
+        else {
+            setError(info.message)
+            setEmail("")
+            setPassword("")
+        }
+        if(response.status==200){
+            window.location.href="/"
         }
     };
 
@@ -55,7 +70,6 @@ export default function Login() {
                         <img src="lmsLogo.png" alt="no image" width="100%" height="100%" />
                     </div>
                 </div>
-                <form onSubmit={handleSubmit} >
                     {
                         error && (
                             <div style={{ marginBottom: "4px", borderRadius: "4px", backgroundColor: "rgb(255,221,223)", color: "rgb(#F9DCE0)", height: "43px", display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -63,30 +77,38 @@ export default function Login() {
                             </div>
                         )
                     }
+                <form onSubmit={handleSubmit(onSubmit)} >
 
                     <TextField
+                        {...register("email", {
+                            required: { value: true, message: "Email is required" }, pattern: {
+                                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                                message: "Invalid email address"
+                            }
+                        })}
+
                         sx={{ marginBottom: "18px" }}
                         label="Enter Email"
                         margin='normal'
                         size='meduim'
                         fullWidth
-                        required
                         type='email'
-                        name='email'
                         value={email}
                         onChange={(e) => { setEmail(e.target.value) }}
                     />
+                    {errors.email&& <span style={{color:"red"}}>{errors.email.message}</span>}
+                    
                     <FormControl fullWidth variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Enter Password</InputLabel>
                         <OutlinedInput
+                            {...register("password", { required: { value: true, message: "Password is required" },minLength: { value: 8, message: "Password must have atleast 8 characters" }, maxLength: { value: 64, message: "Password must not be above 64 characters" } })}
+
                             sx={{ marginBottom: "17px" }}
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
                             size='meduim'
                             margin='dense'
-                            name='password'
                             fullWidth
-                            required
                             value={password}
                             onChange={(e) => { setPassword(e.target.value) }}
                             endAdornment={
@@ -104,7 +126,9 @@ export default function Login() {
                             label="Enter Password"
                         />
                     </FormControl>
-                    <input style={{ backgroundColor: "blue", color: "white", width: "100%", height: "40px", borderRadius: "5px", fontWeight: "bold", cursor: "pointer" }} type="submit" value="Login" />
+                    {errors.password&& <span style={{color:"red"}}>{errors.password.message}</span>}
+
+                    <input style={{ backgroundColor: "blue", color: "white", width: "100%", height: "40px", borderRadius: "5px", fontWeight: "bold", cursor: "pointer" }} disabled={isSubmitting} type="submit" value="Login" />
                 </form>
                 <Divider>or Login with</Divider>
                 <button style={{ border: "1px solid black", width: "298px", backgroundColor: "white", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "7px" }}>
@@ -113,7 +137,7 @@ export default function Login() {
                     </span>
                     Continue with Google
                 </button>
-                <p>Don't have an account?<a style={{ textDecoration: "underline" }} href="#">Sign up</a></p>
+                <p>Don't have an account?<NavLink style={{ textDecoration: "underline" }} to="/signup">Sign up</NavLink></p>
 
             </div>
         </>

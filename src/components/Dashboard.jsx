@@ -2,7 +2,6 @@ import React from 'react'
 import Navbar from './Navbar'
 import { Link } from 'react-router-dom'
 import Table from '../routes/Table'
-import { useState } from 'react'
 
 export default function Dashboard() {
   return (
