@@ -22,8 +22,7 @@ export default function Noise() {
     // Add more rows here as needed
   ]);
   return (
-    <div  className="ag-theme-alpine" 
-    style={{ height: '800px', width: '100%' }} >
+    <div  className="ag-theme-alpine" style={{ height: '400px', width: '100%' }} >
        <AgGridReact
         columnDefs={columnDefs}
         rowData={rowData}

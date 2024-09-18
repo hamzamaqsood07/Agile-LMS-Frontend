@@ -1,42 +1,205 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+    margin: 0%;
+    padding: 0%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.loginParentDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.loginContainer {
+    height: auto;
+    width: 25%;
+    margin-top: 7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.loginHeading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.card {
-  padding: 2em;
+.loginImgParentDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 7%
 }
 
-.read-the-docs {
-  color: #888;
+.loginImgContainer {
+    width: 18%;
+    height: 40%;
+}
+
+.loginImg {
+    width: 100%;
+    height: 100%;
+}
+
+.loginError {
+    margin-bottom: 2%;
+    border-radius: 2%;
+    margin-top: 3%;
+    background-color: rgb(255, 221, 223);
+    color: rgb(#F9DCE0);
+    height: 43px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.loginButton {
+    background-color: blue;
+    margin-bottom: 3%;
+    color: white;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer
+}
+
+.loginContinueButton {
+    border: 1px solid black;
+    margin-bottom: 3%;
+    width: 100%;
+    height: 33px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+    cursor: pointer;
+}
+
+.googleLogoContainer {
+    width: 7%;
+    height: 70%;
+    margin-right: 2%
+}
+
+.googleLogo {
+    width: 100%;
+    height: 100%
+}
+
+.signupLink {
+    text-decoration: underline;
+    color: blue;
+}
+
+.loginForm {
+    width: 100%;
+}
+
+.emailError {
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%
+}
+
+.passwordError {
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%
+}
+
+.sidebarMainDiv {
+    height: 100%;
+    width: 18%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: lightblue
+}
+
+.sidebarImgContainer {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.sidebarImg {
+    height: 100%;
+    width: 26%
+}
+
+.sidebarMenuContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.sidebarMenu {
+    list-style: none;
+    text-align: center;
+}
+
+.sidebarMenuLists {
+    padding: 5% 3%;
+    width: 100%;
+    white-space: nowrap;
+    margin: 7%;
+}
+
+
+.sidebarMenuLists a {
+    text-decoration: none;
+}
+
+.navbar {
+    width: 82%;
+    height: 14%;
+    position: fixed;
+    top: 0;
+    left: 18%;
+    background-color: lightBlue;
+}
+
+.navbarLogoutContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 20%;
+    left: 93%;
+    width: 5%;
+    height: 40%;
+    border-radius: 10%;
+    background-color: blue;
+}
+
+.navbarLogoutLink {
+    color: white;
+    text-decoration: none;
+}
+
+.mainbarContainer {
+    border: 2px solid black;
+    width: 82vw;
+    height: 84vh;
+    position: absolute;
+    top: 14%;
+    left: 18%;
 }

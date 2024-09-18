@@ -1,44 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { createBrowserRouter,redirect,RouterProvider } from 'react-router-dom'
-import Login from './routes/Login'
-import Dashboard from './components/Dashboard'
+import "./app.css"
+import Sidebar from './components/Sidebar'
+import Mainbar from './components/Mainbar'
+import Table from './routes/Table'
 import Signup from './routes/Signup'
+import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom'
+import Login from './routes/Login'
+import Navbar from './components/Navbar'
 
 function App() {
-  const logoutLoader = async ()=>{
-    const response = await fetch("http://localhost:3000/logout",{
-      method:"POST",
-      credentials:'include'
+
+  const logoutLoader = async () => {
+    const response = await fetch("http://localhost:3000/logout", {
+      method: "POST",
+      credentials: 'include'
     })
-    if(response.status==200){
+    if (response.status == 200) {
       return redirect("/login")
     }
   }
+
   const router = createBrowserRouter([
     {
-      path:"/",
-      element:<Dashboard/>
+      path: "/",
+      element: (
+        <>
+          <Sidebar />
+          <Navbar />
+          <Mainbar />
+        </>
+      ),
+      children: [
+        {
+          path: "/table",
+          element: <Table />
+        }
+      ]
     },
     {
-      path:"/login",
-      element:<Login/>
+      path: "/login",
+      element: <Login />
     },
     {
-      path:"/signup",
-      element:<Signup/>
+      path: "/signup",
+      element: <Signup />
     },
     {
-      path:"/logout",
-      loader:logoutLoader
+      path: "/logout",
+      loader: logoutLoader
     }
   ])
 
   return (
     <>
-      <RouterProvider router = {router}/>
+      <RouterProvider router={router} />
     </>
   )
 }
