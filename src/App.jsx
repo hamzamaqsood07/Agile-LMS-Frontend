@@ -1,7 +1,7 @@
 import "./app.css"
 import Sidebar from './components/Sidebar'
 import Mainbar from './components/Mainbar'
-import Table from './routes/Table'
+import StudentTable from './routes/Table'
 import Signup from './routes/Signup'
 import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom'
 import Login from './routes/Login'
@@ -19,6 +19,10 @@ function App() {
     }
   }
 
+  const fetchStudents = async ()=>{
+    const response = await fetch("http://localhost:3000/student/read")
+    return await response.json()
+  }
   const router = createBrowserRouter([
     {
       path: "/",
@@ -32,7 +36,8 @@ function App() {
       children: [
         {
           path: "/table",
-          element: <Table />
+          element: <StudentTable />,
+          loader:fetchStudents
         }
       ]
     },
