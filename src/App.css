@@ -196,10 +196,17 @@
 }
 
 .mainbarContainer {
-    border: 2px solid black;
-    width: 82vw;
-    height: 84vh;
-    position: absolute;
+    width: 82%;
+    height: 86%;
+    position: fixed;
     top: 14%;
     left: 18%;
+}
+
+.studentTableSearchBar {
+    height: 20%;
+    width: 100%;
+    position: absolute;
+    top: 0%;
+    left:0%;
 }
