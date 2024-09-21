@@ -119,7 +119,7 @@
 
 .sidebarMainDiv {
     height: 100%;
-    width: 18%;
+    width: 15%;
     position: fixed;
     top: 0;
     left: 0;
@@ -169,11 +169,11 @@
 }
 
 .navbar {
-    width: 82%;
-    height: 14%;
+    width: 85%;
+    height: 10%;
     position: fixed;
     top: 0;
-    left: 18%;
+    left: 15%;
     background-color: lightBlue;
 }
 
@@ -196,11 +196,12 @@
 }
 
 .mainbarContainer {
-    width: 82%;
-    height: 86%;
+    width: 85%;
+    height: 89%;
     position: fixed;
-    top: 14%;
-    left: 18%;
+    overflow: auto;
+    top: 10%;
+    left: 15%;
 }
 
 .studentTableSearchBar {

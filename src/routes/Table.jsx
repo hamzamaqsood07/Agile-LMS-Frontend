@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 
 import { AgGridReact } from 'ag-grid-react';
@@ -10,6 +10,22 @@ export default function StudentTable() {
 
   const students = useLoaderData()
 
+  const [gridApi, setGridApi] = useState(null)
+
+  const [nameFilter, setNameFilter] = useState("");
+
+  
+  const onGridReady = (params) => {
+    setGridApi(params.api);
+  };
+
+  const handleFilterChange = (e) => {
+    setNameFilter(e.target.value);
+    if(gridApi){
+      gridApi.setGridOption('quickFilterText', e.target.value);
+    }
+  };
+  
   const dateFormatter = params => {
     const date = new Date(params.value);
     return date.toLocaleDateString();
@@ -29,63 +45,64 @@ export default function StudentTable() {
     { headerName: "Status Date", field: "statusDate", sortable: true, filter: true, valueFormatter: dateFormatter }
   ]);
 
-
-  const [rowData] = useState(students);
-
   return (
-    <>
+    < >
       <div className='studentTableSearchBar'>
 
         <TextField
           sx={{ position: "absolute", top: "24%", left: "2%", width: "15%" }}
           name='searchByName'
           placeholder="Search by name"
+          value={nameFilter}
+          onChange={handleFilterChange}
           variant="outlined"
           size='small'
         />
 
-        <TextField
-          sx={{ position: "absolute", top: "24%", left: "20%", width: "15%" }}
-          name='searchByFamily'
-          placeholder="Search by family"
-          variant="outlined"
-          size='small'
-        />
+          {/* <TextField
+            sx={{ position: "absolute", top: "24%", left: "20%", width: "15%" }}
+            name='searchByFamily'
+            placeholder="Search by family"
+            variant="outlined"
+            size='small'
+          />
 
-        <TextField
-          sx={{ position: "absolute", top: "24%", left: "39%", width: "16%" }}
-          name='searchByStatus'
-          select
-          label="Search by status"
-          variant="outlined"
-          size='small'
-        />
+          <TextField
+            sx={{ position: "absolute", top: "24%", left: "39%", width: "16%" }}
+            name='searchByStatus'
+            select
+            label="Search by status"
+            variant="outlined"
+            size='small'
+          />
 
-        <TextField
-          sx={{ position: "absolute", top: "24%", left: "58%", width: "16%" }}
-          name='searchByClass'
-          select
-          label="Search by class"
-          variant="outlined"
-          size='small'
-        />
+          <TextField
+            sx={{ position: "absolute", top: "24%", left: "58%", width: "16%" }}
+            name='searchByClass'
+            select
+            label="Search by class"
+            variant="outlined"
+            size='small'
+          />
 
-        <TextField
-          sx={{ position: "absolute", top: "24%", left: "77%", width: "16%" }}
-          name='searchBySection'
-          select
-          label="Search by section"
-          variant="outlined"
-          size='small'
-        />
+          <TextField
+            sx={{ position: "absolute", top: "24%", left: "77%", width: "16%" }}
+            name='searchBySection'
+            select
+            label="Search by section"
+            variant="outlined"
+            size='small'
+          /> */}
       </div>
 
-      <div className="ag-theme-alpine" style={{ height: '80%', width: '100%', position: "absolute", top: "20%", left: "0%"}} >
+      <div className="ag-theme-alpine" style={{ height: '80%', width: '100%', position: "absolute", top: "20%", left: "0%",padding:"2%" }} >
         <AgGridReact
           columnDefs={columnDefs}
-          rowData={rowData}
+          rowData={students}
+          onGridReady={onGridReady}
         />
       </div>
+
     </>
   )
 }
