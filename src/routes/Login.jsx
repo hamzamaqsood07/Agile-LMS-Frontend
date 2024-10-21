@@ -9,7 +9,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { FormControl } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate} from 'react-router-dom';
 
 
 export default function Login() {
@@ -17,7 +17,7 @@ export default function Login() {
     const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = React.useState(false);
     const [error, setError] = useState("")
-
+    const navigate = useNavigate();
 
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -57,7 +57,7 @@ export default function Login() {
             setPassword("")
         }
         if (response.status == 200) {
-            window.location.href = "/"
+            navigate("/")
         }
     };
 
@@ -109,7 +109,7 @@ export default function Login() {
                         <FormControl fullWidth variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-password">Enter Password</InputLabel>
                             <OutlinedInput
-                                {...register("password", { required: { value: true, message: "Password is required" }, minLength: { value: 8, message: "Password must have atleast 8 characters" }, maxLength: { value: 64, message: "Password must not be above 64 characters" } })}
+                                {...register("password", { required: { value: true, message: "Password is required" }, minLength: { value: 2, message: "Password must have atleast 8 characters" }, maxLength: { value: 64, message: "Password must not be above 64 characters" } })}
 
                                 sx={{ marginBottom: "17px" }}
                                 id="outlined-adornment-password"

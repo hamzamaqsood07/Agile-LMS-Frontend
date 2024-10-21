@@ -20,7 +20,10 @@ function App() {
   }
 
   const fetchStudents = async ()=>{
-    const response = await fetch("http://localhost:3000/student/read")
+    const response = await fetch("http://localhost:3000/student/read",{
+      credentials:'include'
+    })
+    if(response.status==401) return redirect("/login")
     return await response.json()
   }
   const router = createBrowserRouter([
